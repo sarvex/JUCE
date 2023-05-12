@@ -121,7 +121,9 @@ def chunks(lst, n):
 
 
 def get_chunked_string_literal(s):
-    return ' '.join(map(lambda x: 'R"lv2ttl({})lv2ttl"'.format(''.join(x)), chunks(s, 8000)))
+    return ' '.join(
+        map(lambda x: f"""R"lv2ttl({''.join(x)})lv2ttl\"""", chunks(s, 8000))
+    )
 
 
 def get_file_source_string(ttl):
